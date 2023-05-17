@@ -16,3 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get ('/salam', function(){
+    return "Selamat pagi";
+}); // ini adalah routing untuk pemanggilan dirinya sendiri
+Route::get('/ucapan', function(){
+    return view('ucapan'); //ini adalah routing yang mengarahkan ke view yang ada di folder 
+    //resources/views
+});
+Route::get('/nilai', function(){
+    return view('nilai');
+}); //arahkan return nilai ke file nilai yang ada di view 
+Route::get('/daftar_nilai', function(){
+    return view('daftar_nilai');
+});
+//mengarahkan routing ke controller
