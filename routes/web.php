@@ -37,8 +37,18 @@ Route::get('/daftar_nilai', function(){
 //mengarahkan routing ke controller
 Route::get('/siswa', [SiswaController::class, 'dataSiswa']);
 //mengarahkan ke controller dashboardController
-//prefix atau grouping
+//prefix atau group
+Route::prefix('admin')->group(function(){
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
 Route::get('/staff', [StaffController::class, 'index']);
+//ini adalah route untuk pegawai
 Route::get('/pegawai',[PegawaiController::class, 'index']);
+Route::get('/pegawai/create', [PegawaiController::class, 'create']);
+Route::post('/pegawai/store', [PegawaiController::class, 'store']);
+
+//ini adalah route untuk divisi
 Route::get('/divisi', [DivisiController::class, 'index']);
+Route::get('/divisi/create', [DivisiController::class, 'create']);
+Route::post('/divisi/store', [DivisiController::class, 'store']);
+});
+//nantinya pegawai tersebut mengambil pelatihan dan pada table pelatihan bertambah
