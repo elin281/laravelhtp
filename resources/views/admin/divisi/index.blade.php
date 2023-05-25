@@ -55,12 +55,12 @@
                                                 <a class="btn btn-info btn-sm" href="#">Detail</a>
                                                 
                                                 
-                                                    <a class="btn btn-warning btn-sm" href="#">Ubah</a>
+                                        <a class="btn btn-warning btn-sm" href="{{url('admin/divisi/edit/'.$d->id)}}">Ubah</a>
                                                     
                                                     <button type="submit" class="btn btn-danger btn-sm" name="proses" value="hapus" 
                                                     onclick="return confirm('Anda yakin akan dihapus?')">Hapus</button>
 
-                                                    <input type="hidden" name="idx" value="">
+                                                    
 
                                                     
                                                 </form>
