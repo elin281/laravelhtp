@@ -82,7 +82,7 @@
                                             <td>
                                                 <form action="#" method="POST">
                                                   
-                                                <a class="btn btn-info btn-sm" href="#">Detail</a>
+                                        <a class="btn btn-info btn-sm" href="{{url('admin/pegawai/show/'.$p->id)}}">Detail</a>
                                                 
                                                 
                                         <a class="btn btn-warning btn-sm" href="{{url('admin/pegawai/edit/'.$p->id)}}">Ubah</a>
