@@ -2,6 +2,7 @@
 
 @section('content')
 
-ini adalah dashboard
+//ini adalah dashboard
 
+    </script>
 @endsection

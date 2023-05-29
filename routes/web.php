@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\DivisiController;
+use App\Http\Controllers\JabatanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,7 @@ Route::post('/pegawai/store', [PegawaiController::class, 'store']);
 Route::get('/pegawai/edit/{id}', [PegawaiController::class, 'edit']);
 Route::post('/pegawai/update', [PegawaiController::class, 'update']);
 Route::get('/pegawai/show/{id}', [PegawaiController::class, 'show']);
+Route::get('/pegawai/delete/{id}', [PegawaiController::class, 'destroy']);
 
 
 //ini adalah route untuk divisi
@@ -58,6 +60,13 @@ Route::get('/divisi/edit/{id}', [DivisiController::class, 'edit']);
 Route::post('/divisi/update', [DivisiController::class, 'update']);
 Route::get('/divisi/show/{id}', [DivisiController::class, 'show']);
 Route::get('/divisi/delete/{id}', [DivisiController::class, 'destroy']);
+
+
+//ini adalah routing untuk jabatan
+Route::get('/jabatan', [JabatanController::class, 'index']);
+
+//ini adalah routing untuk dashboard
+
 
 });
 //nantinya pegawai tersebut mengambil pelatihan dan pada table pelatihan bertambah

@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Jabatan;
+use DB;
 
-
-class DashboardController extends Controller
+class JabatanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {       
-
-         return view('admin.dashboard');
+    {
+        //
+        $jabatan = DB::table('jabatan')->get();
+        return view('admin.jabatan.index', compact('jabatan'));
     }
 
     /**
