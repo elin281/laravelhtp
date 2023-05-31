@@ -8,6 +8,7 @@ use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\JabatanController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +21,7 @@ use App\Http\Controllers\JabatanController;
 */
 
 Route::get('/', function () {
+    Alert::success('Selamat Datang');
     return view('welcome');
 });
 Route::get ('/salam', function(){
@@ -64,6 +66,11 @@ Route::get('/divisi/delete/{id}', [DivisiController::class, 'destroy']);
 
 //ini adalah routing untuk jabatan
 Route::get('/jabatan', [JabatanController::class, 'index']);
+Route::get('/jabatan/create', [JabatanController::class, 'create']);
+Route::post('/jabatan/store', [JabatanController::class, 'store']);
+Route::get('/jabatan/edit/{id}', [JabatanController::class, 'edit']);
+Route::post('/jabatan/update', [JabatanController::class, 'update']);
+
 
 //ini adalah routing untuk dashboard
 

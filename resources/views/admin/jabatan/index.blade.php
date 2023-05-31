@@ -1,6 +1,7 @@
 @extends('admin.layout.appadmin')
 
 @section('content')
+@include('sweetalert::alert')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
                         <h1 class="mt-4">Tables</h1>
                         <ol class="breadcrumb mb-4">
@@ -20,7 +21,7 @@
                                 DataTable Example -->
                                 <!-- membuat tombol mengarahkan ke file produk_form.php -->
                                
-                                <a href="#" class="btn btn-primary btn-sm"> Tambah</a>
+                                <a href="{{url('admin/jabatan/create')}}" class="btn btn-primary btn-sm"> Tambah</a>
                                 
                             </div>
 
@@ -56,7 +57,7 @@
                                         <a class="btn btn-info btn-sm" href="#">Detail</a>
                                                 
                                                 
-                                        <a class="btn btn-warning btn-sm" href="#">Ubah</a>
+                                        <a class="btn btn-warning btn-sm" href="{{url('admin/jabatan/edit/'.$j->id)}}">Ubah</a>
                                                     
                 <!-- <button type="submit" class="btn btn-danger btn-sm" name="proses" value="hapus" 
                                     onclick="return confirm('Anda yakin akan dihapus?')">Hapus</button> -->
