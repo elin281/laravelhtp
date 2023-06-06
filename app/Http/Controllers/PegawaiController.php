@@ -43,6 +43,33 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nip' => 'required|unique:pegawai|max:5',
+            'nama' => 'required|max:45',
+            'jabatan_id' => 'required|integer',
+            'divisi_id' => 'required|integer',
+            'gender' => 'required',
+            'tmp_lahir' => 'required',
+            'tgl_lahir' => 'required',
+            'kekayaan' => 'required',
+            'alamat' => 'nullable|string|min:10',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,gif,svg|max:2048',
+        ],
+        [
+            'nip.required' => 'NIP Wajib Disii',
+            'nip.unique' => 'NIP sudah ada, masukan NIP yang lain',
+            'nip.max' => 'NIP maksimal 5 karakter',
+            'nama.required' => 'Nama wajib diisi',
+            'nama.max' => 'Nama maksimal 45 karakter',
+            'jabatan_id.required' => 'jabatan wajib disii',
+            'divisi_id.required' => 'Divisi Wajib disii',
+            'tmp_lahir.required' => 'Tempat lahir wajib diisi',
+            'tgl_lahir.required' => 'Tanggal lahir wajib diisi',
+            'kekayaan.required' => 'Kekayaan wajib diisi',
+            'gender.required' => 'Jenis kelamin wajib diisi', 
+        ]
+    
+    );
         //sintaks untuk menambahkan foto 
         if(!empty($request->foto)){
             $fileName = 'foto-'.$request->id.'.'.$request->foto->extension();
@@ -91,8 +118,9 @@ class PegawaiController extends Controller
         $divisi = DB::table('divisi')->get();
         $jabatan = DB::table('jabatan')->get();
         $pegawai = DB::table('pegawai')->where('id', $id)->get();
+        $ar_gender = ['L', 'P'];
 
-        return view ('admin.pegawai.edit', compact('pegawai', 'divisi', 'jabatan'));
+        return view ('admin.pegawai.edit', compact('pegawai', 'divisi', 'jabatan', 'ar_gender'));
     }
 
     /**
@@ -100,13 +128,33 @@ class PegawaiController extends Controller
      */
     public function update(Request $request)
     {
-        //
-        if(!empty($request->foto)){
+        $request->validate([
+            
+            'nama' => 'required|max:45',
+            'jabatan_id' => 'required|integer',
+            'divisi_id' => 'required|integer',
+            'gender' => 'required',
+            'tmp_lahir' => 'required',
+            'tgl_lahir' => 'required',
+            'kekayaan' => 'required',
+            'alamat' => 'nullable|string|min:10',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,gif,svg|max:2048',
+        ]);
+        //foto lama apabila user mengganti fotonya 
+        $foto = DB::table('pegawai')->select('foto')->where('id', $request->id)->get();
+        foreach($foto as $f){
+            $namaFileFotoLama = $f->foto;
+        }
+        //apakah user ingin ganti foto lama 
+        if (!empty($request->foto)){
+// jika ada foto lama makan hapus dulu fotonya 
+        if(!empty($p->foto)) unlink('admin/image/'.$p->foto);
+//proses ganti foto
             $fileName = 'foto-'.$request->id.'.'.$request->foto->extension();
             $request->foto->move(public_path('admin/image'), $fileName);
         }
         else {
-            $fileName = '';
+            $fileName = $namaFileFotoLama;
         }
         DB::table('pegawai')->where('id', $request->id)->update([
             'nip' => $request->nip,
