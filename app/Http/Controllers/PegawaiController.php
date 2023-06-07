@@ -7,6 +7,7 @@ use App\Models\Pegawai;
 use App\Models\Divisi;
 use App\Models\Jabatan;
 use DB;
+use PDF;
 
 class PegawaiController extends Controller
 {
@@ -179,5 +180,23 @@ class PegawaiController extends Controller
         //menambahkan tombol hapus pada pegawai
         DB::table('pegawai')->where('id', $id)->delete();
         return redirect('admin/pegawai');
+    }
+    //ini adalah fungsi percontohan untuk export pdf
+    public function generatePDF(){
+        $data = [
+            'title' => 'Welcome to ItSolutionStuff.com',
+            'date' => date('m/d/Y')
+        ];
+          
+        $pdf = PDF::loadView('admin.pegawai.myPDF', $data);
+    
+        return $pdf->download('testdownload.pdf');
+    }
+    public function pegawaiPDF(){
+        $pegawai = Pegawai::all();
+        
+        $pdf = PDF::loadView('admin.pegawai.pegawaiPDF', ['pegawai' => $pegawai])->setPaper('a4', 'landscape');
+        // return $pdf->download('data_pegawai.pdf');
+        return $pdf->stream();
     }
 }

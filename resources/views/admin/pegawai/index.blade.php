@@ -22,6 +22,9 @@
                                 <a href="{{url('admin/pegawai/create')}}" class="btn btn-primary btn-sm"> Tambah</a>
                                 
                             </div>
+                            <div class="card-header">
+                            <a href="{{url('admin/pegawai/pegawaiPDF')}}" class="btn btn-success btn-sm" target="_blank"> Export To PDF</a>
+                            </div>
 
                             <div class="card-body">
                                 <table id="datatablesSimple">
