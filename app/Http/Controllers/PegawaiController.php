@@ -8,6 +8,9 @@ use App\Models\Divisi;
 use App\Models\Jabatan;
 use DB;
 use PDF;
+use App\Exports\PegawaiExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\PegawaiImport;
 
 class PegawaiController extends Controller
 {
@@ -198,5 +201,15 @@ class PegawaiController extends Controller
         $pdf = PDF::loadView('admin.pegawai.pegawaiPDF', ['pegawai' => $pegawai])->setPaper('a4', 'landscape');
         // return $pdf->download('data_pegawai.pdf');
         return $pdf->stream();
+    }
+    public function exportExcel(){
+        return Excel::download(new PegawaiExport, 'pegawai.xlsx');
+    }
+    public function importExcel(Request $request){
+        $file = $request->file('file');
+        $nama_file = rand().$file->getClientOriginalName();
+        $file->move('file_excel', $nama_file);
+        Excel::import(new PegawaiImport, public_path('/file_excel/'.$nama_file));
+        return redirect('admin/pegawai');
     }
 }
