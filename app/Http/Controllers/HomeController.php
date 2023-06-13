@@ -38,7 +38,13 @@ class HomeController extends Controller
         // ->get();
         // return view('admin.dashboard', compact('pegawai', 'divisi', 'jabatan', 'ar_kekayaan','ar_gender'));
         //hanya redirect
-        return redirect('admin/dashboard');
+        // return redirect('admin/dashboard');
         // return redirect('home');
+        //ini adalah redirect ketika dia dibolehkan masuk ke halaman admin
+        if(auth()->user()->role == 'admin' || auth()->user()->role == 'manajer' || auth()->user()->role == 'staff'){
+            return redirect('admin/dashboard');
+        } else {
+            return redirect('/after_register');
+        }
     }
 }
