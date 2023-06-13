@@ -7,6 +7,7 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\JabatanController;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -41,7 +42,9 @@ Route::get('/daftar_nilai', function(){
 Route::get('/siswa', [SiswaController::class, 'dataSiswa']);
 //mengarahkan ke controller dashboardController
 //prefix atau group
-Route::prefix('admin')->group(function(){
+Route::group(['middleware' => ['auth']], function(){
+    Route::prefix('admin')->name('admin.')->group(function(){
+    
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('index');
 Route::get('/staff', [StaffController::class, 'index']);
 //ini adalah route untuk pegawai
@@ -77,7 +80,13 @@ Route::post('/jabatan/update', [JabatanController::class, 'update']);
 
 
 //ini adalah routing untuk dashboard
-
+//ini adalah route untuk user
+Route::get('/user', [UserController::class, 'index']);
 
 });
+});
 //nantinya pegawai tersebut mengambil pelatihan dan pada table pelatihan bertambah
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
